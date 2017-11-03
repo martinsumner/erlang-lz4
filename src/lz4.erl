@@ -29,6 +29,7 @@ init() ->
                   Path ->
                       Path
               end,
+    io:format("Loading NIF file from ~w~n", [PrivDir]),
     erlang:load_nif(filename:join(PrivDir, lz4), 0).
 
 %% @doc Equals `compress(Binary, [])'.
