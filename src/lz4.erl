@@ -20,16 +20,10 @@ nif_stub_error(Line) ->
     erlang:nif_error({nif_not_loaded,module,?MODULE,line,Line}).
 
 init() ->
-    PrivDir = case code:priv_dir(?MODULE) of
-                  {error, bad_name} ->
-                      io:format("Error finding priv~n"),
-                      EbinDir = filename:dirname(code:which(?MODULE)),
-                      AppPath = filename:dirname(EbinDir),
-                      filename:join(AppPath, "priv");
-                  Path ->
-                      Path
-              end,
-    io:format("Loading NIF file from ~w~n", [PrivDir]),
+    EbinDir = filename:dirname(code:which(?MODULE)),
+    AppPath = filename:dirname(EbinDir),
+    PrivDir = filename:join(AppPath, "priv"),
+    io:format(user, "Loading NIF file from ~s~n", [PrivDir]),
     erlang:load_nif(filename:join(PrivDir, lz4), 0).
 
 %% @doc Equals `compress(Binary, [])'.
