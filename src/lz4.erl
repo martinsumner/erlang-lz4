@@ -22,6 +22,7 @@ nif_stub_error(Line) ->
 init() ->
     PrivDir = case code:priv_dir(?MODULE) of
                   {error, bad_name} ->
+                      io:format("Error finding priv~n"),
                       EbinDir = filename:dirname(code:which(?MODULE)),
                       AppPath = filename:dirname(EbinDir),
                       filename:join(AppPath, "priv");
