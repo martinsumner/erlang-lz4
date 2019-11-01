@@ -11,3 +11,5 @@ priv
 edoc-info
 stylesheet.css
 /_build
+c_src/*.d
+TEST-*
